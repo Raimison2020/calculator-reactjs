@@ -44,6 +44,17 @@ function App() {
         setCurrentValue('0')
         break;
 
+      case 'DEL':
+        const newValue = currentValue.slice(0, -1)
+
+        if (newValue === '' || newValue === '-') {
+          setCurrentValue('0')
+        } else {
+          setCurrentValue(newValue)
+        }
+
+        break
+
       case '=':
         // Se não houver operador salvo, não há o que calcular
         if (operator === null || firstOperand === null) return
