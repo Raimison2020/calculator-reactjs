@@ -2,6 +2,21 @@ import { useState } from "react"
 import { Display } from "./components/Display";
 import { Teclado } from "./components/Teclado";
 
+const calcutate = (firstOperand, operator, secondOperand) => {
+  switch (operator) {
+    case '+':
+      return firstOperand + secondOperand;
+    case '-':
+      return firstOperand - secondOperand;
+    case '*':
+      return firstOperand * secondOperand;
+    case '/':
+      return firstOperand / secondOperand;
+    default:
+      return secondOperand; // Retorna o segundo número se algo der errado
+  }
+}
+
 function App() {
   const [currentValue, setCurrentValue] = useState('0');
   const [firstOperand, setFirstOperand] = useState(null);
@@ -30,12 +45,23 @@ function App() {
         break;
 
       case '=':
-        // Lógica paa calcular o resultado.
+        // Se não houver operador salvo, não há o que calcular
+        if (operator === null || firstOperand === null) return
+
+        const secondOperand = parseFloat(currentValue)
+        const result = calcutate(firstOperand, operator, secondOperand)
+        setCurrentValue(result.toString())
+
+        setFirstOperand(null)
+        setOperator(null)
+
         break;
 
       default:
-        // Se no valor atual é '0, substitui. Se não for, concatena o novo dígito.
-        setCurrentValue(currentValue === '0' ? label : currentValue + label)
+        // Lógica de concatenação de números e pontos
+        if (label === '.' && currentValue.includes('.')) return // Evita dois pontos
+        setCurrentValue(currentValue === '0' && label !== '.' ? label : currentValue + label)
+        break
     }
   }
   return (
