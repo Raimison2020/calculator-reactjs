@@ -1,7 +1,7 @@
-export function Display({ valeu }) {
+export function Display({ value }) {
   return (
     <div className="display">
-      {valeu}
+      {value}
     </div>
   )
 }
