@@ -21,6 +21,7 @@ function App() {
   const [currentValue, setCurrentValue] = useState('0');
   const [firstOperand, setFirstOperand] = useState(null);
   const [operator, setOperator] = useState(null);
+  const [isResult, setIsResult] = useState(false);
 
   const handleButtonClick = (label) => {
 
@@ -33,6 +34,7 @@ function App() {
         setFirstOperand(parseFloat(currentValue))
         setOperator(label)
         setCurrentValue('0')
+        setIsResult(false)
       }
       return
     }
@@ -65,14 +67,25 @@ function App() {
 
         setFirstOperand(null)
         setOperator(null)
+        setIsResult(true)
 
         break;
 
       default:
         // Lógica de concatenação de números e pontos
-        if (label === '.' && currentValue.includes('.')) return // Evita dois pontos
-        setCurrentValue(currentValue === '0' && label !== '.' ? label : currentValue + label)
-        break
+        const shoudReplace = currentValue === '0' || isResult
+
+        if (shoudReplace) {
+          if (label === '.') {
+            setCurrentValue('0.')
+          } else {
+            setCurrentValue(label)
+          }
+          setIsResult(false)
+        } else {
+          if (label === '.' && currentValue.includes('.')) return
+          setCurrentValue(currentValue + label)
+        }
     }
   }
   return (
