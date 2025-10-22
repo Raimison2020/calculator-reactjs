@@ -9,15 +9,29 @@ export function Teclado({ handleClick }) {
     '0', '.',
   ];
 
+  const operadores = ['/', '*', '-', '+', '='];
+
   return (
     <div className="teclado">
-      {botoes.map((label, index) => (
-        <Botao
-          key={index}
-          label={label}
-          handleClick={() => handleClick(label)}
-        />
-      ))}
+      {botoes.map((label, index) => {
+        // Lógica para definir as classes extras
+        let extraClass = '';
+        if (operadores.includes(label)) {
+          extraClass = 'operador';
+        }
+        if (label === '0') {
+          extraClass = 'duplo'; // O zero ocupa duas colunas
+        }
+
+        return (
+          <Botao
+            key={index}
+            label={label}
+            handleClick={() => handleClick(label)}
+            extraClass={extraClass} // Passando a classe extra!
+          />
+        );
+      })}
     </div>
-  )
+  );
 }

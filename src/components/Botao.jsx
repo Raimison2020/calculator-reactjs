@@ -1,6 +1,8 @@
-export function Botao({ label, handleClick }) {
+export function Botao({ label, handleClick, extraClass }) {
+  const classes = `botao ${extraClass || ''}`
+
   return (
-    <button className="botoa" onClick={handleClick}>
+    <button className={classes} onClick={handleClick}>
       {label}
     </button>
   )
