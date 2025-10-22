@@ -1,42 +1,85 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --bg-color: #f0f0f0;
+  --display-bg: #404040;
+  --text-color: #333;
+  --white-text: #ffffff;
+  --operator-color: #ff9500;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background-color: var(--bg-color);
+  font-family: 'Helvetica Neue', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calculator-container {
+  width: 320px;
+  border-radius: 20px;
+  /* Garante que o conteúdo não vaze */
+  overflow: hidden;
+  box-shadow:
+    /* Sombra externa */
+    8px 8px 15px #bebebe,
+    /* Sombra interna para efeito moderno */
+    -8px -8px 15px #ffffff;
+  padding: 10px;
+  background-color: var(--bg-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.display {
+  background-color: var(--display-bg);
+  color: var(--white-text);
+  font-size: 3em;
+  padding: 20px 15px;
+  text-align: right;
+  height: 60px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
+  /* Garante que o texto se ajuste, se necessário */
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 
-.card {
-  padding: 2em;
+.teclado {
+  display: grid;
+  /* 4 colunas de tamanho igual */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
-.read-the-docs {
-  color: #888;
+.botao {
+  background-color: #e0e0e0;
+  color: var(--text-color);
+  border: none;
+  padding: 20px;
+  font-size: 1.5em;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow:
+    4px 4px 8px #bdbdbd,
+    -4px -4px 8px #ffffff;
+}
+
+/* Efeito de clique (pressionar) */
+.botao:active {
+  box-shadow: inset 2px 2px 5px #bdbdbd,
+    inset -2px -2px 5px #ffffff;
+  transform: translateY(1px);
+}
+
+/* Estilo para Operadores (Melhor Contraste) */
+.botao.operador {
+  background-color: var(--operator-color);
+  color: var(--white-text);
+}
+
+/* Estilo para o zero, que deve ocupar duas colunas */
+.botao.duplo {
+  grid-column: span 2;
 }

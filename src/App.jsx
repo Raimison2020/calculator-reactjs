@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Display } from "./components/Display";
 import { Teclado } from "./components/Teclado";
+import './App.css';
 
 const calcutate = (firstOperand, operator, secondOperand) => {
   switch (operator) {
